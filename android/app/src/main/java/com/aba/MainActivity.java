@@ -1,4 +1,4 @@
-package com.app;
+package com.aba.app;
 
 import com.facebook.react.ReactActivity;
 
