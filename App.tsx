@@ -14,18 +14,28 @@ import {
   View, Button,
   Image, TouchableOpacity, TextInput, Text, ScrollView, TouchableHighlight
 } from 'react-native';
+// import AsyncStorage from '@react-native-community/async-storage';
 
 class App extends React.Component {
   state = {
-    show: false,
     valeur: "",
     liste: [],
     delete: "",
+    home: false,
+  }
+  // async componentDidMount() {
+  //   const liste = Boolean(AsyncStorage.getItem('@liste') || "false");
+  //   this.setState({ liste });
+  // }
+  // enregistrer = () => {
+  //   AsyncStorage.setItem('@liste', String(true));
+  //   this.setState({ liste: true })
+  // }
+
+  home = () => {
+    this.setState({ home: true })
   }
 
-  click = () => {
-    this.setState({ show: true })
-  }
   ChangeValue = (val: string) => {
     this.setState({ valeur: val })
   }
@@ -50,12 +60,12 @@ class App extends React.Component {
   }
   render() {
 
-    const { show, valeur } = this.state;
+    const { valeur, home } = this.state;
 
     return (
       <>
         <View style={styles.topbar}>
-          <TouchableOpacity><Image
+          <TouchableOpacity onPress={this.home}><Image
             style={styles.logo}
             source={require('./logo.png')} /></TouchableOpacity>
           <TextInput style={styles.texte} value={valeur} onChangeText={this.ChangeValue}
@@ -68,23 +78,22 @@ class App extends React.Component {
 
         <View style={styles.container}>
           <View style={styles.titre}>
-            <TouchableHighlight style={styles.enregistrer} onPress={this.delete}><Text> Enregistrer </Text></TouchableHighlight>
+            {/* <TouchableHighlight style={styles.enregistrer} onPress={this.enregistrer}><Text> Enregistrer </Text></TouchableHighlight> */}
             <TouchableHighlight style={styles.supprimer} onPress={this.deleteAll}><Text> Supprimer </Text></TouchableHighlight>
           </View>
 
           <View style={styles.liste}>
             <ScrollView persistentScrollbar={true}>
               {this.state.liste.map(element => <Text style={styles.achats}>{element}
-                <TouchableHighlight style={styles.option} onPress={() => { this.delete(element) }}><Text> X  </Text></TouchableHighlight>
+                <TouchableHighlight style={styles.option} onPress={() => { this.delete(element) }}><Text> 🗑️  </Text></TouchableHighlight>
               </Text>)}
             </ScrollView>
           </View>
-          <View style={styles.footer}>
-            <Text style={styles.footer_texte}>Partage ta liste à tes amis  </Text>
 
+          <View style={styles.footer}>
+            <Text style={styles.footer_texte}>Partage ta liste à tes amis LOGO Facebook Insta ...</Text>
           </View>
         </View>
-
       </>
     );
   }
@@ -110,7 +119,9 @@ const styles = StyleSheet.create({
   },
 
   option: {
-    margin: 10
+    margin: 10,
+    padding: 10,
+
   },
   container: {
     width: '100 %',
@@ -144,8 +155,9 @@ const styles = StyleSheet.create({
   },
   achats: {
     padding: 20,
-    fontSize: 15,
+    fontSize: 20,
     fontStyle: "italic",
+    borderBottomWidth: 1,
   },
   footer: {
     marginTop: 10,

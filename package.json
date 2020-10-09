@@ -10,9 +10,12 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
+    "@react-native-community/async-storage": "^1.12.1",
     "react": "16.13.1",
     "react-native": "0.63.3",
+    "react-native-check-box": "^2.1.7",
     "react-native-elements": "^2.3.2",
+    "react-native-share": "^4.0.2",
     "react-native-vector-icons": "^7.1.0"
   },
   "devDependencies": {
